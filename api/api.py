@@ -5,19 +5,19 @@ import string
 
 import secrets
 from firebase import firebase
-firebase1 = firebase.FirebaseApplication("https://premis-f8e8d-default-rtdb.firebaseio.com/", None)
-firebase2=firebase.FirebaseApplication("https://premis-userdb-default-rtdb.firebaseio.com/")
+firebase1 = firebase.FirebaseApplication("", None)
+firebase2=firebase.FirebaseApplication("")
 app = Flask(__name__)
 @app.route('/')
 def no():
     moh={
-        "message":"Premis API is live",
+        "message":"API is live",
         "success": True
         }
     return moh
 
-@app.route('/premis/<string:n>')
-def premis(n):
+@app.route('/pre/<string:n>')
+def pre(n):
     user_id = firebase1.get('/',n)
     if user_id==True:
         result={
@@ -30,7 +30,7 @@ def premis(n):
             "status":False
             }
     return jsonify(result)
-@app.route('/premis/code=<string:m>/user=<int:y>')
+@app.route('/pre/code=<string:m>/user=<int:y>')
 def gen(m,y):
     get_first=firebase2.get('/',y)
     
